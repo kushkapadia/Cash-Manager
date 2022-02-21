@@ -1,0 +1,85 @@
+
+     <%- include('includes/header.ejs') %>
+
+  
+     <div class="container-fluid">
+        <div class="container-sm add-balance">
+          
+            <h1>Your Balance : <div class="wallet-area"><%= curBalance %></div></h1>
+                 
+      
+         
+            <a href="#" class="add-btn" >Add Money</a>
+        </div>
+        <div class=" container-fluid popup">
+<div class="popup-content-div"> 
+    <img class="close" src="/images/close.png" alt="">
+
+    <form action="/add-money" method="POST" class="addMoneyForm row g-3 popp-content">
+        <div class="col-md-6">
+          <label for="balance" class="form-label">Balance</label>
+          <input name="balance" type="number" class="form-control" id="inputEmail4">
+        </div>
+        <div class="col-md-6">
+          <label for="comment" class="form-label">Category</label>
+          <input name="comment" type="text" class="form-control" id="inputPassword4">
+        </div>
+       
+        <div class="col-12">
+          <label for="inputAddress2" class="form-label">Notes</label>
+          <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+        </div>
+   
+        <div class="col-12">
+          <button type="submit" class="btn btn-primary">Add Money</button>
+        </div>
+      </form>
+ </div> 
+
+        </div>
+      
+
+        <div class=" container-fluid expense-popup">
+<div class="popup-content-div"> 
+    <img class="closeExp" src="/images/close.png" alt="">
+<h3>Add Your Expense!</h3>
+    <form action="/add-expense" method="POST" class="addMoneyForm row g-3 popp-content">
+        <div class="col-md-6">
+          <label for="amountSpent" class="form-label">Amount</label>
+          <input name="amountSpent" type="number" class="form-control" id="inputEmail4">
+        </div>
+        <div class="col-md-6">
+          <label for="item" class="form-label">Item</label>
+          <input name="item" type="text" class="form-control" id="inputPassword4">
+        </div>
+       
+        <div class="col-12">
+          <label for="inputAddress2" class="form-label">Notes</label>
+          <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+        </div>
+   
+        <div class="col-12">
+          <button type="submit" class="btn btn-primary">Add Expense</button>
+        </div>
+      </form>
+ </div> 
+        </div>
+      
+
+  <% expenses.forEach((expense)=>{ %>
+    <div class="expenses">
+<p>Amount: <%=expense.amount%> | Item: <%=expense.item%> | Purchase Date: <%=expense.purchaseDate%></p>
+<p>Notes : </p>
+</div>
+  <% })%>
+
+
+        <div class="add-expense-area">
+      <a class="add-expense-btn" href="#">+ Expense</a>
+        </div>
+      </div>
+      <script src="https://kit.fontawesome.com/d0e519250d.js" crossorigin="anonymous"></script>
+       <script src ="/main-bundled.js"></script>
+</body>
+</html>
+     
