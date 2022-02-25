@@ -1,9 +1,9 @@
 
      <%- include('includes/header.ejs') %>
-
+<div class="myMainDiv">
   
      <div class="container-fluid">
-        <div class="container-sm add-balance">
+        <div class="container-fluid add-balance">
           
             <h1>Your Balance : <div class="wallet-area"><%= curBalance %></div></h1>
                  
@@ -20,7 +20,7 @@
           <label for="balance" class="form-label">Balance</label>
           <input name="balance" type="number" class="form-control" id="inputEmail4">
         </div>
-        <div class="col-md-6">
+        <!-- <div class="col-md-6">
           <label for="comment" class="form-label">Category</label>
           <input name="comment" type="text" class="form-control" id="inputPassword4">
         </div>
@@ -28,7 +28,7 @@
         <div class="col-12">
           <label for="inputAddress2" class="form-label">Notes</label>
           <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-        </div>
+        </div> -->
    
         <div class="col-12">
           <button type="submit" class="btn btn-primary">Add Money</button>
@@ -46,16 +46,21 @@
     <form action="/add-expense" method="POST" class="addMoneyForm row g-3 popp-content">
         <div class="col-md-6">
           <label for="amountSpent" class="form-label">Amount</label>
-          <input name="amountSpent" type="number" class="form-control" id="inputEmail4">
+          <input name="amountSpent" type="number" class="form-control" required id="inputEmail4">
         </div>
         <div class="col-md-6">
           <label for="item" class="form-label">Item</label>
-          <input name="item" type="text" class="form-control" id="inputPassword4">
+          <input name="item" type="text" class="form-control" required id="inputPassword4">
+        </div>
+       
+        <div class="col-md-6">
+          <label for="purchaseDate" class="form-label">Purchase Date</label>
+          <input name="purchaseDate" type="date" class="form-control" required id="inputPurchaseDate">
         </div>
        
         <div class="col-12">
-          <label for="inputAddress2" class="form-label">Notes</label>
-          <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+          <label for="notes" class="form-label">Notes</label>
+          <input type="text" name="notes" class="form-control" id="notes" placeholder="Any type of extra note goes here.">
         </div>
    
         <div class="col-12">
@@ -65,21 +70,46 @@
  </div> 
         </div>
       
+<h6 class="title">Unpaid Expenses</h6>
+<% if(!expenses.length){ %>
+  <div class="expenses-showall">
+    <p>Click on the add button below</p>
+  </div>
+     <% } %>
 
   <% expenses.forEach((expense)=>{ %>
     <div class="expenses">
-<p>Amount: <%=expense.amount%> | Item: <%=expense.item%> | Purchase Date: <%=expense.purchaseDate%></p>
-<p>Notes : </p>
+      <div class="child-left">
+       <p><%=expense.item%></p>
+        <p><%= expense.purchaseDate.getDate()  %>/<%=expense.purchaseDate.getMonth()+1 %>/<%= expense.purchaseDate.getFullYear() %></p>
+      <p><%= expense.notes %></p>
+      </div>
+<!-- <p>Amount: <%=expense.amount%> | Item:  | Purchase Date: </p>
+<p>Notes : <%=expense.notes%> </p> -->
+<div class="child-right">
+ <p> ₹<%=expense.amount%></p>
+<form action="/paid" method="POST">
+  <!-- <input type="text" hidden  name="" id=""> -->
+<!-- <input type="submit" value="<%= expense.amount %>" name="paid"> -->
+<button type="submit" class="inner-btn" name="_id" value="<%= expense._id%>">Reimburse</button>
+</form>
+</div>
 </div>
   <% })%>
-
-
+  <% if(expenses.length){ %>
+<div class="expenses-showall ">
+  <a href="/all-expenses">Show All</a>
+</div>
+   <% } %>
         <div class="add-expense-area">
-      <a class="add-expense-btn" href="#">+ Expense</a>
+      <a class="add-expense-btn" href="#">+</a>
         </div>
       </div>
-      <script src="https://kit.fontawesome.com/d0e519250d.js" crossorigin="anonymous"></script>
-       <script src ="/main-bundled.js"></script>
-</body>
-</html>
+    </div>
+
+      <!-- <script src="https://kit.fontawesome.com/d0e519250d.js" crossorigin="anonymous"></script> -->
      
+   <script src ="/main-bundled.js"></script>
+   <%-include('includes/footer') %>
+
+ 

@@ -1,0 +1,38 @@
+<%-include('includes/header.ejs') %>
+
+<div class="myMainDiv">
+  
+    <div class="container-fluid">
+        <h6 class="title">All Unpaid Expenses</h6>
+
+        <% if(!expenses.length){ %>
+            <div class="expenses-showall">
+              <p>No Expenses yet!</p>
+            </div>
+               <% } %>
+
+<% expenses.forEach((expense)=>{ %>
+    <div class="expenses">
+      <div class="child-left">
+       <p><%=expense.item%></p>
+        <p><%= expense.purchaseDate.getDate()  %>/<%=expense.purchaseDate.getMonth()+1 %>/<%= expense.purchaseDate.getFullYear() %></p>
+      <p><%= expense.notes %></p>
+      </div>
+<!-- <p>Amount: <%=expense.amount%> | Item:  | Purchase Date: </p>
+<p>Notes : <%=expense.notes%> </p> -->
+<div class="child-right">
+ <p> ₹<%=expense.amount%></p>
+<form action="/paid" method="POST">
+  <!-- <input type="text" hidden  name="" id=""> -->
+<!-- <input type="submit" value="<%= expense.amount %>" name="paid"> -->
+<button type="submit"  class="inner-btn" name="_id" value="<%= expense._id%>">Reimburse</button>
+</form>
+</div>
+</div>
+  <% })%>
+  
+   <a href="/"><i class="fa-solid fa-angles-left"></i>Go Back</a>
+    </div>
+    </div>
+
+    <%-include('includes/footer') %>

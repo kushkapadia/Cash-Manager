@@ -11,20 +11,21 @@ Money.prototype.cleanUp =function(){
         balance :  Number(this.data.balance),
         AddDate: new Date(),
         authorId : new ObjectID("621193e385a43bb20bb9449a"),
-       
     }
 }
 Money.prototype.cleanUpExtra =function(){
     this.data = {
        
         AddDate: new Date(),
-        authorId : new ObjectID("621193e385a43bb20bb9449a"),
+        authorId : new ObjectID("621193e385a43bb20bb9449a")
        
     }
 }
 
 Money.prototype.addMoney = async function(){
    this.cleanUp()
+   
+  
     let checkIfWalletAvailable = await moneyCollection.findOne({authorId: this.data.authorId})
     if(checkIfWalletAvailable){
         let curBalance =  await (await moneyCollection.find({authorId: this.data.authorId})).toArray()
@@ -51,10 +52,25 @@ Money.prototype.subtractBal = async function(amountSpent){
         let curBalance =  await (await moneyCollection.find({authorId: this.data.authorId})).toArray()
         newBalance =  Number(curBalance[0].balance - amountSpent)
         console.log(newBalance)
-        moneyCollection.findOneAndUpdate({authorId: this.data.authorId}, {$set: {balance: newBalance}})
+       await moneyCollection.findOneAndUpdate({authorId: this.data.authorId}, {$set: {balance: newBalance}})
     } 
     else{
         console.log("Failed")
     }
 }
+
+Money.prototype.addBalance = async function(amountReturned){
+    this.cleanUpExtra()
+
+    // let checkIfWalletAvailable = await moneyCollection.findOne({authorId: this.data.authorId})
+    
+        let curBalance =  await (await moneyCollection.find({authorId: this.data.authorId})).toArray()
+        newBalance =  Number(curBalance[0].balance + amountReturned)
+        console.log(newBalance)
+       await moneyCollection.findOneAndUpdate({authorId: this.data.authorId}, {$set: {balance: newBalance}})
+    
+    
+}
+
+
 module.exports = Money

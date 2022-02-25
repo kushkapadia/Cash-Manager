@@ -1,15 +1,19 @@
 const {MongoClient} = require('mongodb')
 
+const dotenv = require('dotenv')
+dotenv.config()
 
-
-    const client = new MongoClient('mongodb+srv://todoAppUser:kk1234567kk@cluster0.6lvjr.mongodb.net/CashManager?retryWrites=true&w=majority')
+    const client = new MongoClient(process.env.CONNECTIONSTRING)
     
     async function start(){
       await client.connect()
+     
       console.log("Connected")
       module.exports = client.db()
       const app = require('./app')
-      app.listen(3000)
+      app.listen(process.env.PORT)
+      
+   
     }
     
       start()

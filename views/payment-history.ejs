@@ -1,0 +1,40 @@
+<%- include('includes/header.ejs') %>
+
+<div class="myMainDiv">
+  
+    <div class="container-fluid">
+        <h6 class="title">All Expenses</h6>
+
+        <% if(!expenses.length){ %>
+            <div class="expenses-showall">
+              <p>No Expenses yet!</p>
+            </div>
+               <% } %>
+
+<% expenses.forEach((expense)=>{ %>
+    <div class="expenses">
+      <div class="child-left">
+       <p><%=expense.item%></p>
+        <p><%= expense.purchaseDate.getDate()  %>/<%=expense.purchaseDate.getMonth()+1 %>/<%= expense.purchaseDate.getFullYear() %></p>
+      <p><%= expense.notes %></p>
+      </div>
+
+<div class="child-right">
+ <p> ₹<%=expense.amount%></p>
+<form action="/paid" method="POST">
+  <%  if(expense.status==false){ %>
+<button type="submit"  class="inner-btn" name="_id" value="<%= expense._id%>">Reimburse</button>
+   <% }  else {%> 
+ <button readonly disabled class="inner-btn reimbursed" name="_id" value="<%= expense._id%>">Reimbursed</button>
+   
+<%} %>
+</form>
+</div>
+</div>
+  <% })%>
+  
+   <a href="/"><i class="fa-solid fa-angles-left"></i>Go Back</a>
+    </div>
+    </div>
+
+<%-include('includes/footer') %>

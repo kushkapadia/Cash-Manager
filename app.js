@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 const router = require('./router')
 // const router = require('./router')
-
+const userController = require('./controllers/userController')
 //To access the data user inputs in form.
 app.use(express.urlencoded({extended: false}))
 //just a bolierplate code, tells our express server to add the user submitted data to request object.
@@ -17,6 +17,10 @@ app.set('views', 'views')
 app.set('view engine', 'ejs')
 //The template system we are using is ejs. There are many different options in javascript community
 //npm install ejs
+
+
+app.use(userController.passwordProtected)
+
 app.use('/', router)
 
 

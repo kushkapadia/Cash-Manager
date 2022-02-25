@@ -31,12 +31,12 @@ res.send("error")
 }
 
 
-exports.subtractBal = async function(req, res){
-    try{
-let money = new Money()
-await money.subtractBal()
-    }
-    catch{
-console.log("error")
-    }
-}
+// exports.subtractBal = async function(req, res){
+//     try{
+// let money = new Money()
+// await money.subtractBal()
+//     }
+//     catch{
+// console.log("error")
+//     }
+// }
