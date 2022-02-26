@@ -4,7 +4,7 @@ const Money=require('../models/Money')
 exports.passwordProtected = function(req, res, next)
 {
  res.set('WWW-Authenticate', 'Basic realm="Kush"')
-console.log(req.headers.authorization)
+// console.log(req.headers.authorization)
 if(req.headers.authorization == "Basic S3VzaDpqYWltYWhlc2htYXRp"){
   next() //This will tell, this function is done, now move on and go to the next argumented that u included below.
 }

@@ -30,7 +30,7 @@ let expense = new Expense()
 
 try{
     let results = await expense.paid(req.body._id)
-    console.log(results)
+    // console.log(results)
     let money = new Money()
     await money.addBalance(results)
     res.redirect("/")
