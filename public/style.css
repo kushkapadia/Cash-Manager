@@ -5,7 +5,7 @@ box-sizing: border-box;;
 }
 
 .navbar{
-padding: 40px;
+padding: 20px;
 /* display: flex;
 align-items: center;
 justify-content: center;
@@ -224,4 +224,8 @@ box-shadow: none;
     color: #e4874a;
     font-size: 20px;
     margin: 10px;
+}
+.navbar-brand img{
+    height:50px;
+    
 }
