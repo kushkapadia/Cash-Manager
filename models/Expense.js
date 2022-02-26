@@ -32,9 +32,9 @@ Expense.prototype.cleanUp = function(){
     }
 
     Expense.prototype.paid = async function(paidId){
-        console.log(paidId)
+        // console.log(paidId)
         let updatedDoc = await expenseCollection.findOneAndUpdate({_id: ObjectID(paidId)}, {$set: {status: true}})
-           console.log("updated")
+        //    console.log("updated")
         //   let updatedDoc= await expenseCollection.find({_id:ObjectID(paidId)}).toArray()
            // let updatedDoc = await moneyCollection.findOne({_id: paidId})
         //    console.log("This is the doc returned by findone and update " + upd)
