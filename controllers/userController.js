@@ -26,7 +26,7 @@ let expenses = await (await expense.getExpenses()).filter({status:false}).sort({
 // .filter((onlyUnpaid)=>{
 //     return onlyUnpaid.status == false 
 // })
-console.log(expenses)
+// console.log(expenses)
 
     res.render("homepage", {
         curBalance:balance,
