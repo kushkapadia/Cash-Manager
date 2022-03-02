@@ -30,7 +30,7 @@ border: 2px solid rgb(20, 20, 20);
 text-decoration: underline;
 }
 
-.popup, .expense-popup{
+.popup, .expense-popup, .edit-expense-popup{
     background-color: rgba(20, 14, 14, 0.521) ;
     position:absolute;
     width:100%;
@@ -43,7 +43,7 @@ text-decoration: underline;
     left: 0;
 }
 
-.close, .closeExp{
+.close, .closeExp, .closeEdit{
     width: 20px;
     height: 20px;
    position: absolute;
@@ -174,22 +174,18 @@ padding: 10px;
     border-radius: 10px;
     background-color: #e4874a;
     color: #fff;
-    margin-top:30px;
+    /* margin-top:10px; */
     outline: none;
     border: none;
     box-shadow: 2px 2px 2px 2px #181b1f;
 }
-.inner-btn:hover{
-    width:100px;
-    margin-bottom: 5px;
-    border-radius: 10px;
-    background-color: #e4874a;
-    color: #fff;
-    margin-top:30px;
-    outline: none;
-    border: none;
-    box-shadow: 2px 2px #181b1f;
-}
+ .inner-btn:hover{
+
+    background-color: #e6772d;
+   
+    /* border: none; */
+    box-shadow: 2px 2px #181b1f; 
+} 
 
 .title{
     color: #fff;
@@ -228,4 +224,29 @@ box-shadow: none;
 .navbar-brand img{
     height:50px;
     
+}
+
+.fa-solid{
+    cursor: pointer;
+    
+}
+.fa-trash-can{
+    margin-right: 20px;
+}
+.deleteExpense{
+    display: inline-block;
+}
+.delete-btn{
+    background-color: transparent;
+    outline: none;
+    color: rgb(241, 0, 0);
+    border: none;
+}
+
+.personalExp-btn{
+    background-color: rgb(174, 0, 255);
+}
+
+.personalExp-btn:hover{
+    background-color: rgb(146, 9, 209);
 }

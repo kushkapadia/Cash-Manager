@@ -11,5 +11,9 @@ router.post('/add-expense', expenseController.saveExpense)
 router.post('/paid', expenseController.paid )
 router.get('/all-expenses', expenseController.showAllExpenses)
 router.get('/payment-history', expenseController.completeExpenseHistory)
+router.post('/delete', expenseController.delete)
+
+router.get('/edit/:id', expenseController.edit)
+router.post('/edit-expense/:id', expenseController.actuallyEdit)
 
 module.exports=router

@@ -3,7 +3,7 @@
 <div class="myMainDiv">
   
     <div class="container-fluid">
-        <h6 class="title">All Expenses</h6>
+        <h6 class="title">All Transactions</h6>
 
         <% if(!expenses.length){ %>
             <div class="expenses-showall">
@@ -17,16 +17,44 @@
        <p><%=expense.item%></p>
         <p><%= expense.purchaseDate.getDate()  %>/<%=expense.purchaseDate.getMonth()+1 %>/<%= expense.purchaseDate.getFullYear() %></p>
       <p><%= expense.notes %></p>
+      <% if(expense.expType == "Personal" || expense.status == true){ %>
+        <form class="deleteExpense" method="post" action="/delete">
+          <button type="submit" name="DeletionId" class="delete-btn" value="<%=expense._id%>"><i class="fa-solid fa-trash-can"></i></button> 
+            </form>  
+          <%}%>
+      <a href="/edit/<%=expense._id%>" id="edit-exp-btn"><i class="fa-solid fa-marker"></i></a>
+
       </div>
 
 <div class="child-right">
  <p> ₹<%=expense.amount%></p>
 <form action="/paid" method="POST">
   <%  if(expense.status==false){ %>
-<button type="submit"  class="inner-btn" name="_id" value="<%= expense._id%>">Reimburse</button>
+
+    <p style="color:rgb(255, 188, 5); text-decoration: underline"><strong><em><%=expense.expType%></em></strong></p>
+
+ <% if(expense.expType == null){ %>
+<form action="/paid" method="POST">
+<button type="submit" class="inner-btn" name="_id" value="<%= expense._id%>">Reimburse</button>
+</form>
+ 
+<% } else {%>
+  <form action="/paid" method="POST">
+    <button type="submit" class="inner-btn personalExp-btn" name="_id" value="<%= expense._id%>">Reimburse</button>
+    </form>
+ <%} %>
    <% }  else {%> 
- <button readonly disabled class="inner-btn reimbursed" name="_id" value="<%= expense._id%>">Reimbursed</button>
-   
+ <p style="color:rgb(255, 188, 5); text-decoration: underline"><strong><em><%=expense.expType%></em></strong></p>
+ <% if(expense.expType == null){ %>
+<form action="/paid" method="POST">
+<button disabled class="inner-btn reimbursed" name="_id" value="<%= expense._id%>">Reimbursed</button>
+</form>
+ 
+<% } else {%>
+  <form action="/paid" method="POST">
+    <button disabled class="inner-btn reimbursed" name="_id" value="<%= expense._id%>">Reimbursed</button>
+    </form>
+ <%} %>
 <%} %>
 </form>
 </div>

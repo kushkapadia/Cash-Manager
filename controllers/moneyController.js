@@ -1,7 +1,7 @@
 const Money = require('../models/Money')
 
 exports.addMoney = async function(req, res, next){
-    // console.log(req.body)
+    console.log(req.body)
     let money = new Money(req.body)
 
     try{
@@ -30,13 +30,3 @@ res.send("error")
   
 }
 
-
-// exports.subtractBal = async function(req, res){
-//     try{
-// let money = new Money()
-// await money.subtractBal()
-//     }
-//     catch{
-// console.log("error")
-//     }
-// }

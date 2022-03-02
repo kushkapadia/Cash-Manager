@@ -22,7 +22,7 @@ exports.home = async function(req, res){
     balance = String(curBalance[0].balance)
     }
 let expense = new Expense()
-let expenses = await (await expense.getExpenses()).filter({status:false}).sort({_id: -1}).limit(3).toArray()
+let expenses = await (await expense.getExpenses()).filter({status:false}).sort({purchaseDate: -1}).limit(3).toArray()
 // .filter((onlyUnpaid)=>{
 //     return onlyUnpaid.status == false 
 // })

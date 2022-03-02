@@ -1,0 +1,45 @@
+<%- include('includes/header.ejs') %>
+<div class="myMainDiv">
+    <div class=" container-fluid ">
+        <div class="popup-content-div"> 
+      
+            <h3>Edit Your Expense!</h3>
+            <form action="/edit-expense/<%=expense._id%>" method="POST" class="editExpenseForm row g-3 popp-content">
+                <div class="col-md-6">
+                  <label for="amountSpent" class="form-label">Amount</label>
+                  <input name="amountSpent" value="<%=expense.amount%>" type="number" class="form-control" required id="inputEmail4">
+                </div>
+                <div class="col-md-6">
+                  <label for="item" class="form-label">Item</label>
+                  <input name="item" value="<%=expense.item%>" type="text" class="form-control" required id="inputPassword4">
+                </div>
+               
+                <div class="col-md-6">
+                  <label for="purchaseDate"  class="form-label">Purchase Date</label>
+   
+                  <input name="purchaseDate" value="<%=purchaseDate%>" type="date" class="form-control" required id="inputPurchaseDate">
+                </div>
+               
+                <div class="col-12">
+                  <label for="notes" class="form-label">Notes</label>
+                  <input type="text" value="<%=expense.notes%>" name="notes" class="form-control" id="notes" placeholder="Any type of extra note goes here.">
+                </div>
+                <div class="col-12">
+                  <label for="notes" class="form-label">Personal</label>
+        <% if(expense.expType == "Personal"){ %>
+          <input type="checkbox"  checked id="vehicle1" name="personalExp" value="Personal">
+
+        <% } else { %>
+          <input type="checkbox"  id="vehicle1" name="personalExp" value="Personal">
+
+        <%}%>
+                </div>
+                <div class="col-12">
+                  <button type="submit" class="btn btn-primary">Save Changes</button>
+                </div>
+              </form>
+         </div> 
+                </div>
+    </div>
+
+   <%-include('includes/footer') %>

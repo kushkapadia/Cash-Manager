@@ -17,16 +17,29 @@
        <p><%=expense.item%></p>
         <p><%= expense.purchaseDate.getDate()  %>/<%=expense.purchaseDate.getMonth()+1 %>/<%= expense.purchaseDate.getFullYear() %></p>
       <p><%= expense.notes %></p>
+      <% if(expense.expType == "Personal"){ %>
+        <form class="deleteExpense" method="post" action="/delete">
+          <button type="submit" name="DeletionId" class="delete-btn" value="<%=expense._id%>"><i class="fa-solid fa-trash-can"></i></button> 
+            </form>  
+          <%}%>
+<a href="/edit/<%=expense._id%>" id="edit-exp-btn"><i class="fa-solid fa-marker"></i></a>
+
       </div>
-<!-- <p>Amount: <%=expense.amount%> | Item:  | Purchase Date: </p>
-<p>Notes : <%=expense.notes%> </p> -->
 <div class="child-right">
  <p> ₹<%=expense.amount%></p>
+ <p style="color:rgb(255, 188, 5); text-decoration: underline"><strong><em><%=expense.expType%></em></strong></p>
+
+ <% if(expense.expType == null){ %>
 <form action="/paid" method="POST">
-  <!-- <input type="text" hidden  name="" id=""> -->
-<!-- <input type="submit" value="<%= expense.amount %>" name="paid"> -->
-<button type="submit"  class="inner-btn" name="_id" value="<%= expense._id%>">Reimburse</button>
+<button type="submit" class="inner-btn" name="_id" value="<%= expense._id%>">Reimburse</button>
 </form>
+ 
+<% } else {%>
+  <form action="/paid" method="POST">
+    <button type="submit" class="inner-btn personalExp-btn" name="_id" value="<%= expense._id%>">Reimburse</button>
+    </form>
+ <%} %>
+ 
 </div>
 </div>
   <% })%>

@@ -30,7 +30,7 @@ Money.prototype.addMoney = async function(){
     if(checkIfWalletAvailable){
         let curBalance =  await (await moneyCollection.find({authorId: this.data.authorId})).toArray()
         newBalance =  Number(curBalance[0].balance + this.data.balance)
-        // console.log(newBalance)
+        console.log(newBalance)
         moneyCollection.findOneAndUpdate({authorId: this.data.authorId}, {$set: {balance: newBalance}})
     } else{
  await moneyCollection.insertOne(this.data)
@@ -51,7 +51,7 @@ Money.prototype.subtractBal = async function(amountSpent){
     if(checkIfWalletAvailable){
         let curBalance =  await (await moneyCollection.find({authorId: this.data.authorId})).toArray()
         newBalance =  Number(curBalance[0].balance - amountSpent)
-        // console.log(newBalance)
+        console.log(newBalance)
        await moneyCollection.findOneAndUpdate({authorId: this.data.authorId}, {$set: {balance: newBalance}})
     } 
     else{
@@ -66,7 +66,7 @@ Money.prototype.addBalance = async function(amountReturned){
     
         let curBalance =  await (await moneyCollection.find({authorId: this.data.authorId})).toArray()
         newBalance =  Number(curBalance[0].balance + amountReturned)
-        // console.log(newBalance)
+        console.log(newBalance)
        await moneyCollection.findOneAndUpdate({authorId: this.data.authorId}, {$set: {balance: newBalance}})
     
     
