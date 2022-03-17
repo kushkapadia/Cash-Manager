@@ -15,11 +15,16 @@
     "@babel/core": "^7.17.5",
     "@babel/preset-env": "^7.16.11",
     "babel-loader": "^8.2.3",
+    "bcryptjs": "^2.4.3",
+    "connect-mongo": "^4.6.0",
     "dotenv": "^16.0.0",
     "ejs": "^3.1.6",
     "express": "^4.17.3",
+    "express-session": "^1.17.2",
+    "md5": "^2.3.0",
     "mongodb": "^4.4.0",
     "nodemon": "^2.0.15",
+    "validator": "^13.7.0",
     "webpack": "^5.69.1"
   },
   "devDependencies": {

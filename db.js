@@ -9,7 +9,7 @@ dotenv.config()
       await client.connect()
      
       console.log("Connected")
-      module.exports = client.db()
+      module.exports = client
       const app = require('./app')
       app.listen(process.env.PORT)
       

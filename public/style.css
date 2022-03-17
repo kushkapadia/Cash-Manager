@@ -250,3 +250,53 @@ box-shadow: none;
 .personalExp-btn:hover{
     background-color: rgb(146, 9, 209);
 }
+
+.sign-btn{
+    width:80px;
+    background-color:#e4874a;
+    color: #fff;
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    display: block;
+    margin-top: 7px;
+    margin-left: 50%;
+    transform: translateX(-50%);
+}
+.register-form{
+    text-align: center;
+}
+
+.register-heading{
+    color:rgb(220, 93, 20)
+}
+
+.guestpageText{
+    font-size: 18px;
+    margin:10px;
+    /* color:rgb(220, 93, 20) */
+    color: #fff;
+}
+
+.form-field{
+    text-align: center;
+    border: 2px solid #fff;
+    border-radius: 10px;
+    padding: 5px;
+    margin:5px;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    background-color: #000000;
+    color: #e4874a;
+}
+.form-field:focus{
+    border: 2px solid #e6772d;
+    outline:none;
+}
+.btn-register{
+    background-color: #e6772d;
+    width: 100px;
+    border: none;
+    padding: 7px;
+    color: #fff;
+}

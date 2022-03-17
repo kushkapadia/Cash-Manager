@@ -12,9 +12,9 @@ exports.saveExpense = async function(req, res){
 balance:0,
         }
         let money = new Money(data)
-    await  money.addMoney()
-await money.subtractBal(req.body.amountSpent)
-let expense = new Expense(req.body)
+    await  money.addMoney(req.session.user_id)
+await money.subtractBal(req.body.amountSpent, req.session.user._id )
+let expense = new Expense(req.body, req.session.user._id)
 // console.log(req.body)
 await expense.saveExpense()
 res.redirect('/')
@@ -30,7 +30,7 @@ try{
     let results = await expense.paid(req.body._id)
     // console.log(results)
     let money = new Money()
-    await money.addBalance(results)
+    await money.addBalance(results, req.session.user._id)
     res.redirect("/")
 }
 catch{
@@ -41,7 +41,8 @@ catch{
 
 exports.showAllExpenses = async function(req, res){
     let expense = new Expense()
-let expenses = await (await expense.getExpenses()).sort({purchadeDate:-1}).filter({status: false}).toArray()
+let expenses = await expense.getAllExpenses(req.session.user._id)
+
 res.render('allExpenses', {
     expenses: expenses
 })
@@ -50,7 +51,7 @@ res.render('allExpenses', {
 
 exports.completeExpenseHistory = async function(req, res){
     let expense = new Expense()
-let expenses =  await (await expense.getExpenses()).sort({purchaseDate:-1}).toArray()
+let expenses =  await expense.getFullExpenses(req.session.user._id)
 
 res.render('payment-history', {
     expenses: expenses
@@ -92,11 +93,11 @@ Date.prototype.yyyymmdd = function() {
     if(oldExpense.value.amount < Number( req.body.amountSpent)){
 let diff = Number(req.body.amountSpent) - oldExpense.value.amount
 // console.log("Sub:" + diff)
-await money.subtractBal(diff)
+await money.subtractBal(diff, req.session.user._id)
     } else{
         let diff = oldExpense.value.amount - Number(req.body.amountSpent)
         // console.log("Add:" + diff)
-        await money.addBalance(diff)
+        await money.addBalance(diff, req.session.user._id)
     }
 
 // console.log(oldExpense.value)

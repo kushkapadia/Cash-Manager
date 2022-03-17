@@ -1,9 +1,10 @@
-const expenseCollection = require('../db').collection("expenses");
+const expenseCollection = require('../db').db().collection("expenses");
 const ObjectID = require('mongodb').ObjectID
 const Money = require('./Money')
 
-let Expense= function(data){
-    this.data = data
+let Expense= function(data, userId){
+    this.data = data,
+    this.authorId = new ObjectID(userId)
     this.errors =[]
     }
 
@@ -15,7 +16,7 @@ Expense.prototype.cleanUp = function(){
         notes: this.data.notes,
         status: false,
         expType: this.data.personalExp,
-        authorId : new ObjectID("621193e385a43bb20bb9449a"),
+        authorId : this.authorId,
 
     }
 }
@@ -24,16 +25,37 @@ Expense.prototype.cleanUp = function(){
         await expenseCollection.insertOne(this.data) 
     }
 
-    Expense.prototype.getExpenses = async function(){
+    Expense.prototype.getExpenses = async function(userId){
         // this.cleanUp()
-        let authorId = new ObjectID("621193e385a43bb20bb9449a")
-
+        let authorId = new ObjectID(userId)
         let expenses = await expenseCollection.find({authorId: authorId})
-        return expenses
+      
+        return (await expenses.sort({purchaseDate: -1}).toArray()).filter((item)=>{
+            return item.status ==false
+        }).slice(0, 3)
     }
 
+
+Expense.prototype.getAllExpenses = async function(userId){
+    let authorId = new ObjectID(userId)
+        let expenses = await expenseCollection.find({authorId: authorId})
+      
+        return (await expenses.sort({purchaseDate: -1}).toArray()).filter((item)=>{
+            return item.status == false
+        })
+    
+}
+
+Expense.prototype.getFullExpenses = async function(userId){
+    let authorId = new ObjectID(userId)
+        let expenses = await expenseCollection.find({authorId: authorId})
+
+    
+        return  expenses.sort({purchaseDate: -1}).toArray()
+        
+}
+
     Expense.prototype.paid = async function(paidId){
-        console.log(paidId)
         let updatedDoc = await expenseCollection.findOneAndUpdate({_id: ObjectID(paidId)}, {$set: {status: true}})
         //    console.log("updated")
  
@@ -52,8 +74,6 @@ Expense.findSingleById = async function(id){
 }
 
 Expense.edit = async function(editId, updatedData){
-    console.log(editId)
-    console.log(updatedData.amountSpent)
     try{
    let oldExpense = await expenseCollection.findOneAndUpdate({_id: new ObjectID(editId)}, {$set: {amount: Number(updatedData.amountSpent), item: updatedData.item, purchaseDate: new Date(updatedData.purchaseDate), notes: updatedData.notes, expType: updatedData.personalExp }})
    

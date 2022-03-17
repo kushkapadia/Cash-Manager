@@ -5,6 +5,15 @@ const moneyController = require('./controllers/moneyController.js')
 const expenseController = require('./controllers/expenseController')
 
 router.get('/', userController.home)
+router.post('/login', userController.login)
+router.post('/register', userController.register)
+router.post('/logout', userController.logout)
+
+//temp
+// router.get('/home', userController.homeMain)
+
+
+// router.get('/', userController.home)
 router.post('/add-money', moneyController.addMoney, moneyController.checkBalance)
 router.post('/add-expense', expenseController.saveExpense)
 // router.get('/bal', moneyController.checkBalance)

@@ -15,24 +15,30 @@
 <body>
     <nav class="navbar navbar-dark bg-dark">
    <a href="/" class="navbar-brand "><img src="/images/logo.png" alt="Logo"></a>
-<a  class="navbar-links" href="/payment-history">Payment History</a>
-        <div class="container-fluid">
-   
-         
-      
-            <!-- <form class="row g-3" action="/login" method="post">
-                <div class="col-auto">
-                  <label for="staticEmail2" class="visually-hidden">Email</label>
-                  <input type="username" class="form-control"  id="inputPassword2" placeholder="Usrname">
 
-                </div>
+
+
+        <!-- <div class="container-fluid"> -->
+<%if(user){ %>
+  <a  class="navbar-links" href="/payment-history">Payment History</a>
+          <form action="/logout" method="POST">
+          <a  class="navbar-links" href="/logout"> <button class="sign-btn">Logout</button></a>
+        </form>
+     <% } else{%> 
+            <form class="row g-3" action="/login" method="post">
                 <div class="col-auto">
-                  <label for="inputPassword2" class="visually-hidden">Password</label>
-                  <input type="password" class="form-control" id="inputPassword2" placeholder="Password">
-                </div>
-                <div class="col-auto">
-                  <button type="submit" class="btn btn-primary mb-3">Login</button>
-                </div>
-              </form> -->
+
+                 <!-- <form action="/login" method="POST">  -->
+                  
+    <input class="form-field" type="text" name="username" placeholder="Username">
+  
+  
+    <input class="form-field" type="password" name="password" placeholder="Password">
+  
+    <input class = "sign-btn" type="submit" value="Log In">
+  
+</form>
+<%}%>
+              </form> 
         </div>
       </nav>

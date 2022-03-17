@@ -11,7 +11,17 @@
             </div>
                <% } %>
 
+               <%let sum=0 %>
+               <%let Othersum=0 %>
 <% expenses.forEach((expense)=>{ %>
+
+ <% if(expense.expType != null && expense.purchaseDate.getMonth()  == new Date().getMonth()){ %>
+<% sum= sum+ expense.amount %>
+ <%} %>
+
+ <% if(expense.expType == null && expense.purchaseDate.getMonth()  == new Date().getMonth()){ %>
+<% Othersum= Othersum+ expense.amount %>
+ <%} %>
     <div class="expenses">
       <div class="child-left">
        <p><%=expense.item%></p>
@@ -61,6 +71,9 @@
 </div>
   <% })%>
   
+<p style="color: #fff;"> This Month: <br> Personal Expense: ₹<%=sum%> <br>
+  Other Expense: ₹<%=Othersum%></p>
+
    <a href="/"><i class="fa-solid fa-angles-left"></i>Go Back</a>
     </div>
     </div>
