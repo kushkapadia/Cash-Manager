@@ -300,3 +300,8 @@ box-shadow: none;
     padding: 7px;
     color: #fff;
 }
+
+.constraint{
+    color:rgb(220, 93, 20);
+    font-size: 10px;
+}
