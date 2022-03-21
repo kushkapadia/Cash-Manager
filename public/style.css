@@ -305,3 +305,9 @@ box-shadow: none;
     color:rgb(220, 93, 20);
     font-size: 10px;
 }
+.myMainDiv-guestPage{
+    min-height: 70vh; 
+   background-color: #34343a;
+   width: auto;
+   margin:0 px;
+}
