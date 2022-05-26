@@ -1,0 +1,47 @@
+<%- include('includes/header.ejs') %>
+
+<div class="myMainDiv">
+  
+    <div class="container-fluid">
+        <h6 class="title"><%= user.username%>'s Wallet History</h6>
+
+        <% if(!historyDocs.length){ %>
+          <div class="expenses-showall">
+            <p>Add Money To maintain history</p>
+          </div>
+             <% } else { %>
+              <% historyDocs.forEach((historyDoc)=>{ %>
+              <div class="expenses">
+               
+            
+             
+                 
+                      <div class="child-left">
+                        <p><strong style="color: orange;"><em>Previous Balance:</em> </strong><%=historyDoc.previousBalance%></p>
+                        <p><strong style="color: orange;"><em>Added Date:</em> </strong><%=historyDoc.previousAddDate.getDate()  %>/<%=historyDoc.previousAddDate.getMonth()+1 %>/<%= historyDoc.previousAddDate.getFullYear() %></p>
+                        
+                        <p><strong style="color: orange;"><em>Amount Added:</em></strong> <%=historyDoc.newAmt%></p>
+                        <p><strong style="color: orange;"><em>Add Date:</em></strong> <%=historyDoc.previousAddDate.getDate()  %>/<%=historyDoc.previousAddDate.getMonth()+1 %>/<%= historyDoc.previousAddDate.getFullYear() %></p>
+                        <p><strong style="color: orange;"><em>New Balance:</em></strong> <%=historyDoc.newBalance%></p>
+                        <p><strong style="color: orange;"><em>Note:</em></strong> <%=historyDoc.note%></p>
+                      </div>
+                      <div class="child-right">
+                        <form class="deleteExpense" method="post" action="/delete-wallet-history">
+                          <button type="submit" name="DeletionId" class="delete-btn" value="<%=historyDoc._id%>"><i class="fa-solid fa-trash-can"></i></button> 
+                            </form>  
+
+                      </div>
+          </div> 
+          <%})%>
+          </div>
+    
+            <% } %>
+
+   <a href="/"><i class="fa-solid fa-angles-left"></i>Go Back</a><br>
+   <form action="/delete-complete-wallet-history" method="post">
+   <!-- <button style="background-color: red; color: #fff">Delete All</button> -->
+  </form>
+    </div>
+    </div>
+
+<%-include('includes/footer') %>

@@ -15,7 +15,7 @@ Expense.prototype.cleanUp = function(){
         purchaseDate: new Date(this.data.purchaseDate),
         notes: this.data.notes,
         status: false,
-        expType: this.data.personalExp,
+        expType: this.data.expType,
         authorId : this.authorId,
 
     }
