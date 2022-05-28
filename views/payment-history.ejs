@@ -48,9 +48,7 @@
 <button type="submit" class="inner-btn" name="_id" value="<%= expense._id%>">Reimburse</button>
 </form>
  
-<% } else if(expense.expType == "PocketMoney" || expense.expType == "Prepaid"){ %>
-
-  <% } else {%>
+<% } else {%>
   <form action="/paid" method="POST">
     <button type="submit" class="inner-btn personalExp-btn" name="_id" value="<%= expense._id%>">Reimburse</button>
     </form>

@@ -5,7 +5,7 @@
      <div class="container-fluid">
         <div class="container-fluid add-balance">
           
-            <h1><%= user.username%>'s Balance : <div class="wallet-area"><%= curBalance %></div></h1>
+            <h1>Your Balance : <div class="wallet-area"><%= curBalance %></div></h1>
                  
       
          
@@ -18,10 +18,7 @@
     <form action="/add-money" method="POST" class="addMoneyForm row g-3 popp-content">
         <div class="col-md-6">
           <label for="balance" class="form-label">Balance</label>
-          <input name="balance" type="number" class="form-control" id="inputEmail4"> <br>
-        <!--updated 23-05-22 -->
-          <label for="note" class="form-label">Note</label>
-          <input name="balanceNote" type="text" class="form-control" id="inputEmail4">
+          <input name="balance" type="number" class="form-control" id="inputEmail4">
         </div>
         <!-- <div class="col-md-6">
           <label for="comment" class="form-label">Category</label>
@@ -67,19 +64,10 @@
         </div>
 
         <div class="col-12">
-          <p>Expense type:</p>
+          <label for="notes" class="form-label">Personal</label>
 
-         <input type="radio" id="expenseType" name="expType" value="Personal">
-          <label for="notes" class="expenseType">Personal</label>
-         <!-- <br>
-         <input type="radio" id="expenseType" name="expType" value="PocketMoney">
-         <label for="notes" class="form-label">Pocket Money</label>
-        <br>
-         <input type="radio" id="vehicle1" name="expType" value="Prepaid">
-         <label for="notes" class="form-label">Prepaid</label> -->
-  
+         <input type="checkbox" id="vehicle1" name="personalExp" value="Personal">
         </div>
-      
    
         <div class="col-12">
           <button type="submit" class="btn btn-primary">Add Expense</button>
@@ -120,8 +108,6 @@
 <button type="submit" class="inner-btn" name="_id" value="<%= expense._id%>">Reimburse</button>
 </form>
  
-<% } else if(expense.expType == "PocketMoney" || expense.expType == "Prepaid"){ %>
-
 <% } else {%>
   <form action="/paid" method="POST">
     <button type="submit" class="inner-btn personalExp-btn" name="_id" value="<%= expense._id%>">Reimburse</button>

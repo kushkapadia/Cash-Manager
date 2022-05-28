@@ -26,25 +26,6 @@ exports.checkBalance = async function(req, res){
  } catch{
 res.send("error")
  }
-}
-
- exports.completeWalletHistory = async function(req, res){
-     let money = new Money()
-    try{
-        let historyDocs = await money.getWalletHistory(req.session.user._id)
-    
-     res.render('wallet-history', {
-         historyDocs: historyDocs
-    })
-    } catch{
-        res.send("Error")
-    }
- }
   
-
-
-exports.delete = async function(req, res){
-    let money = new Money()
-    await money.deleteHistoryDoc(req.body.DeletionId)
-    res.redirect('/wallet-history')
 }
+
